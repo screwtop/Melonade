@@ -1,0 +1,25 @@
+# Miscellaneous properties:
+
+pwd
+pid
+info hostname
+info tclversion et al.
+
+# Tk/GUI-related
+winfo screenwidth .
+wm state .
+wm geometry .	winfo geometry .
+winfo id .
+winfo name .	wm title .
+wm attributes .
+winfo class .
+
+
+info cmdcount
+memory info (if compiled with support for this)
+
+
+Package-related:
+info loaded
+package names
+

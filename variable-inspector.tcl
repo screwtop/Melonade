@@ -1,7 +1,7 @@
 # A variable list/inspector for Melonade
 
 # How to distinguish ordinary variables from arrays? (note that [info vars] includes arrays)  What about dicts?  Might we care about lists also (at least report [llength] maybe)?
-# [info vars] [info exists] [array exists] [set]
+# [info vars] [info globals ][info exists] [array exists] [set]
 # What about namespaces?!
 
 toplevel .variables; wm title .variables Variables

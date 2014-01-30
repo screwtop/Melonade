@@ -7,6 +7,7 @@ source every.tcl
 source variable-inspector.tcl
 # TODO: command browser
 # TODO: proc browser/inspector/editor/manager ([info procs][info args][info body])
+source proc-inspector.tcl
 # TODO: functions as well?  i.e. mathops
 source widget-inspector.tcl
 source channel-inspector.tcl
