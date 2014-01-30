@@ -37,3 +37,5 @@ proc refresh_variable_tree {} {
 # every 1000 refresh_variable_tree
 pack [button .variables.refresh_button -text Refresh -command refresh_variable_tree] -side bottom -fill x
 
+refresh_variable_tree
+

@@ -40,10 +40,13 @@ proc clear_widget_tree {} {
 	set ::treeview_id(.) {}	;# Oh, but restore the phony root element
 }
 
-populate_widget_tree .
+proc refresh_widget_tree {} {
+	clear_widget_tree
+	populate_widget_tree .
+}
 
-
-
+# TODO: have it manually refreshed for now?  Provide a button?
+pack [button .widgets.refresh_button -text Refresh -command refresh_widget_tree] -side bottom -fill x
 
 # Attributes that might be handy.  The most common ones should appear on the list, with the option to expand to show more detail (or have a separate property window for the full detail - remember that a lot of them will be common to all/most widgets)
 winfo class .widgets.tree
@@ -92,4 +95,7 @@ bind .widgets.tree <<TreeviewSelect>> {
 }
 
 
-# Refreshing these will introduce some interesting problems.  A simplistic approach would be to clear everything out and rebuild from what's there now, but that would lose the treeview item open/closed states and might be flickery.  
+# Refreshing these will introduce some interesting problems.  A simplistic approach would be to clear everything out and rebuild from what's there now, but that would lose the treeview item open/closed states and might be flickery.
+
+refresh_widget_tree
+

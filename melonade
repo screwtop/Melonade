@@ -1,13 +1,14 @@
-#!/usr/bin/wish
+#!/usr/bin/env wish8.6
 
 # This is Melonade, a set of simple development/debugging accessories for Tcl/Tk.
 # The idea is that you would start a Wish/Tcl+Tk shell for use as an interactive scratchpad for development, and [source] melonade to provide some GUI tools for inspecting/introspecting parts of the Tcl environment, with the ability to set traces, manage procs, etc. as well.
 
 source every.tcl
-# TODO: variable browser/inspector
+source variable-inspector.tcl
 # TODO: command browser
 # TODO: proc browser/inspector/editor/manager ([info procs][info args][info body])
 # TODO: functions as well?  i.e. mathops
 source widget-inspector.tcl
 source channel-inspector.tcl
+# TODO: X11 event viewer?
 

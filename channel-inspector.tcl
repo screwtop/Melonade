@@ -17,14 +17,17 @@ pack .channels.tree -expand 1 -fill both
 proc refresh_channel_tree {} {
 	foreach channel [.channels.tree children {}] {.channels.tree delete $channel}
 	foreach channel [chan names] {
-		puts $channel
+#		puts $channel
 		set ::channel_treeview_node($channel) [.channels.tree insert {} end -text $channel]
 		foreach {attribute value} [chan configure $channel] {
-			puts "$attribute = $value"
+		#	puts "$attribute = $value"
 			.channels.tree insert $::channel_treeview_node($channel) end -values [list $attribute $value]
 		}
 	}
 }
 
-every 1000 refresh_channel_tree
+# every 1000 refresh_channel_tree
+pack [button .channels.refresh_button -text Refresh -command refresh_channel_tree] -side bottom -fill x
+
+refresh_channel_tree
 
