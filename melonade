@@ -2,14 +2,43 @@
 
 # This is Melonade, a set of simple development/debugging accessories for Tcl/Tk.
 # The idea is that you would start a Wish/Tcl+Tk shell for use as an interactive scratchpad for development, and [source] melonade to provide some GUI tools for inspecting/introspecting parts of the Tcl environment, with the ability to set traces, manage procs, etc. as well.
+# It would also be nice to be able to start it and then "attach" to an existing interpreter.  Maybe use [send] to tell the other interpreter to source "melonade" (you'd need to know its appname though - is there any way to browse those?).
+# Another mode of operation might be to provide the functionality as a package, to avoid having to mess with source paths when starting it up. (TODO)
 
-source every.tcl
-source variable-inspector.tcl
-# TODO: command browser
-# TODO: proc browser/inspector/editor/manager ([info procs][info args][info body])
-source proc-inspector.tcl
+package require Tk
+
+set ::melonade_home [file dirname [info script]]
+#set melonade_home [file normalize [file dirname [info script]]]
+#puts stderr "\$melonade_home = $melonade_home"
+#puts stderr "\[info script\] = [info script]"
+# + [file normalize] as well here?
+# lappend auto_path [file dirname [info script]]
+# Oh, pity - $auto_path doesn't apply to [source].
+#puts stderr "\$auto_path = $auto_path"
+
+foreach component {
+	every.tcl
+	variable-inspector.tcl
+	proc-inspector.tcl
+	widget-inspector.tcl
+	channel-inspector.tcl
+} {
+	puts stderr "Activating $component"
+	source [file join $::melonade_home $component]
+}
+# TODO: command browser (not only procs)
 # TODO: functions as well?  i.e. mathops
-source widget-inspector.tcl
-source channel-inspector.tcl
-# TODO: X11 event viewer?
+# TODO: (X11?) event viewer?
+# TODO: a console!  For when you have a running program with no interactive shell active but you need one!   Maybe import/adapt the one built into Piaf.
+
+# Add Melonade functionality to a running app (provided you know its Tk appname):
+# TODO: a melonade namespace for these!  Also, what if you wanted to use Melonade on a running Melonade instance?!
+proc attach {appname} {
+	send $appname [list source [file join $::melonade_home melonade]]
+}
+
+# Might be nice to provide the ability to tidy up as well:
+proc detach {appname} {
+	# TODO: perhaps a separate script?  Or define a cleanup proc in each component file?
+}
 

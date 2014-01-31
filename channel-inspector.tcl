@@ -5,6 +5,7 @@
 # chan configure file9
 # chan pending output stderr
 # chan eof?
+# http://stackoverflow.com/questions/9486361/can-i-find-a-filename-from-a-filehandle-in-tcl
 
 toplevel .channels; wm title .channels Channels
 ttk::treeview .channels.tree -columns {Attribute Value} -selectmode browse
