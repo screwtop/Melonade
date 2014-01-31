@@ -5,13 +5,16 @@
 # It would also be nice to be able to start it and then "attach" to an existing interpreter.  Maybe use [send] to tell the other interpreter to source "melonade" (you'd need to know its appname though - is there any way to browse those?).
 # Another mode of operation might be to provide the functionality as a package, to avoid having to mess with source paths when starting it up. (TODO)
 
+# This is actually also a package; see end for package declaration (it's there in case of errors in the other code).
+
 package require Tk
 
-set ::melonade_home [file dirname [info script]]
-#set melonade_home [file normalize [file dirname [info script]]]
-#puts stderr "\$melonade_home = $melonade_home"
-#puts stderr "\[info script\] = [info script]"
-# + [file normalize] as well here?
+namespace eval ::melonade {
+	set version 0.0
+	set home [file dirname [info script]]	;# + file normalize?
+	# TODO: namespace export ...
+}
+
 # lappend auto_path [file dirname [info script]]
 # Oh, pity - $auto_path doesn't apply to [source].
 #puts stderr "\$auto_path = $auto_path"
@@ -24,7 +27,7 @@ foreach component {
 	channel-inspector.tcl
 } {
 	puts stderr "Activating $component"
-	source [file join $::melonade_home $component]
+	source [file join $::melonade::home $component]
 }
 # TODO: command browser (not only procs)
 # TODO: functions as well?  i.e. mathops
@@ -33,12 +36,21 @@ foreach component {
 
 # Add Melonade functionality to a running app (provided you know its Tk appname):
 # TODO: a melonade namespace for these!  Also, what if you wanted to use Melonade on a running Melonade instance?!
-proc attach {appname} {
+proc ::melonade::attach {appname} {
 	send $appname [list source [file join $::melonade_home melonade]]
 }
 
 # Might be nice to provide the ability to tidy up as well:
-proc detach {appname} {
+proc ::melonade::detach {appname} {
 	# TODO: perhaps a separate script?  Or define a cleanup proc in each component file?
 }
+
+# If running as a standalone program, exit from Tcl/Tk altogether.
+# If imported as a package or sourced directly, just close the windows and clean up the namespace.
+proc ::melonade::exit {} {
+	# TODO
+}
+
+# I've noticed that many packages are named with an initial capital.  Why?  Should I do likewise?
+package provide melonade $::melonade::version
 
