@@ -1,4 +1,4 @@
-#!/usr/bin/env wish8.6
+#!/usr/bin/env wish
 
 # This is Melonade, a set of simple development/debugging accessories for Tcl/Tk.
 # The idea is that you would start a Wish/Tcl+Tk shell for use as an interactive scratchpad for development, and [source] melonade to provide some GUI tools for inspecting/introspecting parts of the Tcl environment, with the ability to set traces, manage procs, etc. as well.
@@ -15,6 +15,10 @@ namespace eval ::melonade {
 	# TODO: namespace export ...
 }
 
+# TODO: maybe move this into a separate settings.tcl file (and add support for ~/.melonade/settings.tcl slurping).
+namespace eval ::melonade::settings {
+}
+
 # lappend auto_path [file dirname [info script]]
 # Oh, pity - $auto_path doesn't apply to [source].
 #puts stderr "\$auto_path = $auto_path"
@@ -25,6 +29,8 @@ foreach component {
 	proc-inspector.tcl
 	widget-inspector.tcl
 	channel-inspector.tcl
+	console.tcl
+	packages.tcl
 } {
 	puts stderr "Activating $component"
 	source [file join $::melonade::home $component]

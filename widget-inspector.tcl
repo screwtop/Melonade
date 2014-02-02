@@ -21,6 +21,7 @@ pack .widgets.tree -expand 1 -fill both
 set ::treeview_id(.) {}	;# The treeview uses the empty string to identify the root of the tree.
 
 proc populate_widget_tree {parent} {
+	# TODO: should these be sorted in alphabetical order?  If we leave them in the order that they are returned, does that indicate the order in which they were created, or the order in which they appear on the GUI?
 	foreach widget [winfo children $parent] {
 		set ::treeview_id($widget) [.widgets.tree insert $::treeview_id($parent) end -text $widget -values [list [winfo class $widget] [winfo id $widget] [winfo name $widget]]]
 		# We also want a map going the other way (treeview ID -> widget window name):

@@ -17,7 +17,7 @@ pack .channels.tree -expand 1 -fill both
 # Maybe "refresh_channel_tree" and have it clear out the existing entries first?
 proc refresh_channel_tree {} {
 	foreach channel [.channels.tree children {}] {.channels.tree delete $channel}
-	foreach channel [chan names] {
+	foreach channel [lsort [chan names]] {
 #		puts $channel
 		set ::channel_treeview_node($channel) [.channels.tree insert {} end -text $channel]
 		foreach {attribute value} [chan configure $channel] {
