@@ -14,6 +14,7 @@ winfo name .	wm title .
 wm attributes .
 winfo class .
 
+winfo interps <- !!!
 
 info cmdcount
 memory info (if compiled with support for this)
