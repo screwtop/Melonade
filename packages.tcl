@@ -1,3 +1,7 @@
+# List of packages (currently only those that are loaded).
+
+# TODO: use [package names] to get a list of available packages.
+
 toplevel .packages; wm title .packages Packages
 ttk::treeview .packages.tree -columns {Path} -selectmode browse
 pack .packages.tree -expand 1 -fill both
