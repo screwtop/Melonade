@@ -11,10 +11,9 @@ proc refresh_after_tree {} {
 	# TODO: wasn't there a simpler way to do this that I found, avoiding the loop?
 	foreach after [.afters.tree children {}] {.afters.tree delete $after}
 	foreach after [lsort [after info]] {
-		set ::after_treeview_node($after) [.afters.tree insert {} end -text $after]
-		foreach {script type} [after info $after] {
-			.afters.tree insert $::after_treeview_node($after) end -values [list $type $script]
-		}
+		# TODO: hmm, maybe it would make sense to have the lines of the script as child nodes in the treeview, so that each after can be shown on a single line by default, uniformly spaced.
+		lassign [after info $after] script type
+		.afters.tree insert {} end -text $after -values [list $type $script]
 	}
 }
 
