@@ -1,3 +1,9 @@
+TODO:
+[ ] Avoid naming clashes for widgets, perhaps by predending "melonade" and the PID.
+[ ] Use namespaces more widely for internal variables.
+[ ] Adjust column widths (as already done in after-inspector.tcl).
+[ ] Perhaps use child nodes for script lines in the [after] inspector.
+
 # Miscellaneous properties:
 
 pwd
