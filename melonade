@@ -31,6 +31,7 @@ foreach component {
 	channel-inspector.tcl
 	console.tcl
 	packages.tcl
+	after-inspector.tcl
 } {
 	puts stderr "Activating $component"
 	source [file join $::melonade::home $component]
